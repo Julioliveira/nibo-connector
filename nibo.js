@@ -1,4 +1,5 @@
 (function() {
+    //Desenvolvido por Julio Oliveira
     // Create the connector object
     var myConnector = tableau.makeConnector();
     // Define the schema
@@ -324,6 +325,20 @@
             dataType: tableau.dataTypeEnum.string
         }];
 
+        var organization_cols = [{
+            id: "id",
+            alias: "id empresa",
+            dataType: tableau.dataTypeEnum.string
+        },{
+            id: "name",
+            alias: "nome empresa",
+            dataType: tableau.dataTypeEnum.string
+        },{
+            id: "company_name",
+            alias: nome companhia,
+            dataType: tableau.dataTypeEnum.string
+        }];
+
         var balance_cols = [{
             id: "account_id",
             alias: "id conta",
@@ -388,7 +403,13 @@
             alias: "Consulta saldo",
             columns: balance_cols
         };
-        schemaCallback([categorias, grupos, entradas, contas, centros_custo, bancos, stakeholders, saldo]);
+
+        var empresa = {
+            id: "organization",
+            alias: "empresa",
+            columns: organization_cols
+        }
+        schemaCallback([categorias, grupos, entradas, contas, centros_custo, bancos, stakeholders, saldo, emrpesa]);
     };
 
     // Download the data
@@ -593,6 +614,22 @@
                         "bank_id": items[i].bank.id,
                         "balance": items[i].balance,
                         "organization_id": dataObj.organization
+                    });
+                }
+                table.appendRows(tableData);
+            doneCallback();
+            });
+        }
+        else if (table.tableInfo.id == "organization") {
+            $.getJSON("https://api.nibo.com.br/empresas/v1/organizations?" + dataString, function(resp) {
+                var items = resp.items;
+                var i = 0;
+               
+                for (i = 0, len = items.length; i < len; i++) {
+                    tableData.push({
+                        "id": items[i].organizationId,
+                        "name": items[i].name,
+                        "company_name": items[i].companyName
                     });
                 }
                 table.appendRows(tableData);

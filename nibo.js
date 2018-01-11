@@ -1,5 +1,5 @@
 (function() {
-    //Desenvolvido por Julio Oliveira
+    //Desenvolvido por Julio
     // Create the connector object
     var myConnector = tableau.makeConnector();
     // Define the schema
@@ -325,20 +325,6 @@
             dataType: tableau.dataTypeEnum.string
         }];
 
-        var organization_cols = [{
-            id: "id",
-            alias: "id empresa",
-            dataType: tableau.dataTypeEnum.string
-        },{
-            id: "name",
-            alias: "nome empresa",
-            dataType: tableau.dataTypeEnum.string
-        },{
-            id: "company_name",
-            alias: nome companhia,
-            dataType: tableau.dataTypeEnum.string
-        }];
-
         var balance_cols = [{
             id: "account_id",
             alias: "id conta",
@@ -356,6 +342,21 @@
             alias: "id empresa",
             dataType: tableau.dataTypeEnum.string
         }];
+
+        var organization_cols = [{
+            id: "id",
+            alias: "id empresa",
+            dataType: tableau.dataTypeEnum.string
+        },{
+            id: "name",
+            alias: "nome empresa",
+            dataType: tableau.dataTypeEnum.string
+        },{
+            id: "company_name",
+            alias: "nome companhia",
+            dataType: tableau.dataTypeEnum.string
+        }];
+
         var categorias = {
             id: "categories",
             alias: "Lista de categorias",
@@ -403,13 +404,12 @@
             alias: "Consulta saldo",
             columns: balance_cols
         };
-
-        var empresa = {
+        var empresas = {
             id: "organization",
             alias: "empresa",
             columns: organization_cols
         }
-        schemaCallback([categorias, grupos, entradas, contas, centros_custo, bancos, stakeholders, saldo, emrpesa]);
+        schemaCallback([categorias, grupos, entradas, contas, centros_custo, bancos, stakeholders, saldo, empresas]);
     };
 
     // Download the data

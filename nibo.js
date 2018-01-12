@@ -736,22 +736,22 @@
                
                 for (i = 0, len = items.length; i < len; i++) {
                         tableData.push({
-                                "id": item[i].scheduleId,
-                                "description": item[i].description,
-                                "reference": item[i].reference,
-                                "value": item[i].value,
-                                "open_value": item[i].openValue,
-                                "schedule_date": item[i].scheduleDate,
-                                "accrual_date": item[i].accrualDate,
-                                "dueDate": item[i].dueDate,
-                                "stakeholder": item[i].stakeholder.id,
-                                "category": item[i].category.id,
-                                "cost_center": item[i].costCenter.id,
-                                "is_dued": item[i].isDued,
-                                "is_paid": item[i].isPaid,
-                                "is_flagged": item[i].isFlagged,
-                                "is_entry": item[i].isEntry,
-                                "type": item[i].type
+                                "id": items[i].scheduleId,
+                                "description": items[i].description,
+                                "reference": items[i].reference,
+                                "value": items[i].value,
+                                "open_value": items[i].openValue,
+                                "schedule_date": items[i].scheduleDate,
+                                "accrual_date": items[i].accrualDate,
+                                "dueDate": items[i].dueDate,
+                                "stakeholder": items[i].stakeholder.id,
+                                "category": items[i].category.id,
+                                "cost_center": items[i].costCenter.id,
+                                "is_dued": items[i].isDued,
+                                "is_paid": items[i].isPaid,
+                                "is_flagged": items[i].isFlagged,
+                                "is_entry": items[i].isEntry,
+                                "type": items[i].type
                         });
                 }
                 table.appendRows(tableData);

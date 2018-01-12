@@ -744,9 +744,9 @@
                                 "schedule_date": items[i].scheduleDate,
                                 "accrual_date": items[i].accrualDate,
                                 "dueDate": items[i].dueDate,
-                                "stakeholder": items[i].stakeholder.id,
-                                "category": items[i].category.id,
-                                "cost_center": items[i].costCenter.id,
+                                "stakeholder": items[i].stakeholder ? items[i].stakeholder.id : null,
+                                "category": items[i].category ? items[i].category.id : null,
+                                "cost_center": items[i].costCenter ? items[i].costCenter.id : null,
                                 "is_dued": items[i].isDued,
                                 "is_paid": items[i].isPaid,
                                 "is_flagged": items[i].isFlagged,
@@ -772,9 +772,9 @@
             };
             if (!dataObj.organization || !dataObj.apitoken){
                 $('#errorMessage').css('display', 'block');
-                $('#errorMessage').html('<center>Preencha todos os campos</center>')
             }
             else{
+                
                 $('#errorMessage').css('display', 'none');
                 tableau.connectionData = JSON.stringify(dataObj); // Use this variable to pass data to your getSchema and getData functions
                 tableau.connectionName = "NIBO WEB Data Connector"; // This will be the data source name in Tableau

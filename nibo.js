@@ -355,7 +355,90 @@
             id: "company_name",
             alias: "nome companhia",
             dataType: tableau.dataTypeEnum.string
+        },{
+            id: "cnpj",
+            alias: "cnpj",
+            dataType: tableau.dataTypeEnum.string
+        },{
+            id: "plan",
+            alias: "plano",
+            dataType: tableau.dataTypeEnum.string
+        },{
+            id: "accountant_id",
+            alias: "id contador",
+            dataType: tableau.dataTypeEnum.string
+        },{
+            id: "accountant_name",
+            alias: "nome contador",
+            dataType: tableau.dataTypeEnum.string
         }];
+
+        var schedules_cols = [{
+            id: "id",
+            alias: "id agendamento",
+            dataType: tableau.dataTypeEnum.string
+        },{
+            id: "description",
+            alias: "descricao",
+            dataType: tableau.dataTypeEnum.string
+        },{
+            id: "reference",
+            alias: "referencia",
+            dataType: tableau.dataTypeEnum.string
+        },{
+            id: "value",
+            alias: "valor",
+            dataType: tableau.dataTypeEnum.float
+        },{
+            id: "open_value",
+            alias: "valor aberto",
+            dataType: tableau.dataTypeEnum.float
+        },{
+            id: "schedule_date",
+            alias: "data agendamento",
+            dataType: tableau.dataTypeEnum.datetime
+        },{
+            id: "accrual_date",
+            alias: "data acrual",
+            dataType: tableau.dataTypeEnum.datetime
+        },{
+            id: "due_date",
+            alias: "data vencimento",
+            dataType: tableau.dataTypeEnum.datetime
+        },{
+            id: "stakeholder",
+            alias: "stakeholder",
+            dataType: tableau.dataTypeEnum.string
+        },
+        {
+            id: "category",
+            alias: "categoria",
+            dataType: tableau.dataTypeEnum.string
+        },{
+            id: "cost_center",
+            alias: "centros de custo",
+            dataType: tableau.dataTypeEnum.string
+        },{
+            id: "is_dued",
+            alias: "vencida",
+            dataType: tableau.dataTypeEnum.bool
+        },{
+            id: "is_paid",
+            alias: "pago",
+            dataType: tableau.dataTypeEnum.bool
+        },{
+            id: "is_flagged",
+            alias: "sinalizada",
+            dataType: tableau.dataTypeEnum.bool
+        },{
+            id: "is_entry",
+            alias: "entrada",
+            dataType: tableau.dataTypeEnum.bool
+        },{
+            id: "type",
+            alias: "tipo",
+            dataType: tableau.dataTypeEnum.string
+        },]
 
         var categorias = {
             id: "categories",
@@ -613,7 +696,7 @@
                         "account_id": items[i].accountId,
                         "bank_id": items[i].bank.id,
                         "balance": items[i].balance,
-                        "organization_id": dataObj.organization
+                        "organization_id": dataObj.organization,
                     });
                 }
                 table.appendRows(tableData);
@@ -629,8 +712,41 @@
                     tableData.push({
                         "id": items[i].organizationId,
                         "name": items[i].name,
-                        "company_name": items[i].companyName
+                        "company_name": items[i].companyName,
+                        "cnpj": items[i].cnpj,
+                        "plan": items[i].plan,
+                        "accountant_id": items[i].accountant_id,
+                        "accountant_name": items[i].accountant_name
                     });
+                }
+                table.appendRows(tableData);
+            doneCallback();
+            });
+        }
+        else if (table.tableInfo.id == "schedules") {
+            $.getJSON("https://api.nibo.com.br/empresas/v1/schedules?" + dataString, function(resp) {
+                var items = resp.items;
+                var i = 0;
+               
+                for (i = 0, len = items.length; i < len; i++) {
+                        tableData.push({
+                                "id": item[i].scheduleId,
+                                "description": item[i].description,
+                                "reference": item[i].reference,
+                                "value": item[i].value,
+                                "open_value": item[i].openValue,
+                                "schedule_date": item[i].scheduleDate,
+                                "accrual_date": item[i].accrualDate,
+                                "dueDate": item[i].dueDate,
+                                "stakeholder": item[i].stakeholder.id,
+                                "category": item[i].category.id,
+                                "cost_center": item[i].costCenter.id,
+                                "is_dued": item[i].isDued,
+                                "is_paid": item[i].isPaid,
+                                "is_flagged": item[i].isFlagged,
+                                "is_entry": item[i].isEntry,
+                                "type": item[i].type
+                        });
                 }
                 table.appendRows(tableData);
             doneCallback();

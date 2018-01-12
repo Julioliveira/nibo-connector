@@ -492,7 +492,13 @@
             alias: "empresa",
             columns: organization_cols
         }
-        schemaCallback([categorias, grupos, entradas, contas, centros_custo, bancos, stakeholders, saldo, empresas]);
+        
+        var agendamentos = {
+            id: "schedules",
+            alias: "agendamento",
+            columns: schedules_cols
+        }
+        schemaCallback([categorias, grupos, entradas, contas, centros_custo, bancos, stakeholders, saldo, empresas, agendamentos]);
     };
 
     // Download the data
